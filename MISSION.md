@@ -14,7 +14,7 @@ The goal is to build a tool that doesn't just show you math problems, but unders
 
 ## 🏛️ The Architecture: The "Brain" (The Graph)
 Since you are learning the ropes, we are going to use a special concept called a **Directed Acyclic Graph (DAG)**. 
-
+ 
 ### What is a Graph?
 Imagine a bunch of dots (we call these **Nodes**) connected by arrows.
 - **Node**: A specific topic (e.g., "Addition").
@@ -39,11 +39,24 @@ Our first goal is to build the bare-bones logic. No fancy UI yet—just the "Eng
 
 ### 🛠️ The Roadmap
 
-#### 1. The Domain (The "What")
-We need to tell Python what a "Topic" looks like.
-- **Topic A**: Prerequisite of Topic B?
-- **Mastery Score**: A number from 0 to 100.
-- **Problem Bank**: A list of questions for each topic.
+#### 1. The Domain (The "What") — CURRENT CHALLENGE
+We need to define the "Shape" of our knowledge in `backend/models.py`.
+
+**The Task:**
+Create two Pydantic classes:
+- **`Topic`**:
+  - `id`: unique string.
+  - `name`: string.
+  - `prerequisites`: a list of other Topic IDs (e.g., `["topic_1", "topic_2"]`).
+  - `mastery_score`: a float (starts at 0.0).
+- **`Problem`**:
+  - `id`: unique string.
+  - `topic_id`: the ID of the topic it belongs to.
+  - `question`: the text of the problem.
+  - `answer`: the solution text.
+  - `difficulty`: an integer (e.g., 1, 2, or 3).
+
+**Pro-Tip**: Use `from pydantic import BaseModel` and `from typing import List`.
 
 #### 2. The Logic (The "How")
 We build a simple "Choose Next" algorithm.
