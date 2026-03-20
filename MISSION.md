@@ -4,73 +4,46 @@
 
 ---
 
-## 🏔️ The Vision: From Choosing to Learning
-In our last project ("theONE"), we focused on **Selecting** (picking a movie). 
-In "The Forge," we are focusing on **Mastering**. 
-
-The goal is to build a tool that doesn't just show you math problems, but understands **what you know** and **what you don't**. It acts like a digital tutor.
-
----
-
-## 🏛️ The Architecture: The "Brain" (The Graph)
-Since you are learning the ropes, we are going to use a special concept called a **Directed Acyclic Graph (DAG)**. 
- 
-### What is a Graph?
-Imagine a bunch of dots (we call these **Nodes**) connected by arrows.
-- **Node**: A specific topic (e.g., "Addition").
-- **Arrow**: A prerequisite (to learn "Multiplication," you must first learn "Addition").
-
-**Why do we do this?**
-Because learning isn't a straight line. It's a map. If you fail a Physics problem about "Forces," the system can look at the map and see: *"Ah, he doesn't understand Vectors! Let's go back and fix that first."*
+## 🏔️ The Vision: The JARVIS Knowledge Engine
+The Forge is NOT just an app. It is the **Intelligence Module** of the JARVIS ecosystem.
+- **Goal**: Feed JARVIS a PDF textbook. 
+- **Process**: LLM parses the PDF → Identifies Concepts (Topics) → Extracts Problems → Maps the Graph.
+- **Output**: An adaptive study loop that tells Red exactly what to forge next.
 
 ---
 
-## 🗡️ The Forge Cycle: Feedback Loops
-Every great piece of software is built on a **Feedback Loop**.
-1. **Challenge**: The app gives you a problem.
-2. **Action**: You solve it.
-3. **Response**: The app says "Correct" or "Incorrect."
-4. **Adjustment**: The app updates your "Mastery Score" and picks the next best challenge.
+## 🏛️ The Architecture: The "Graph" (The Bridge to RAG)
+You asked: *"Why define topics and problems this way?"*
+**The Answer**: This is our **Target Schema**. 
+When we later build the **RAG (Retrieval Augmented Generation)** feature, the AI needs a "format" to output its findings. We are telling the AI: *"When you read this Physics book, I want you to give me a list of `Topic` objects and `Problem` objects that fit this specific structure."*
+
+### Why a List in `seed_data.py`?
+In programming, a `List` is a simple collection. Right now, it's manually written. Tomorrow, it will be the output of our PDF parser. By building the `logic.py` on top of this list now, we ensure the "Brain" works *before* the "Parser" is even built.
 
 ---
 
-## ⚡ Level 1: The Steel Path (The Core Engine)
-Our first goal is to build the bare-bones logic. No fancy UI yet—just the "Engine."
+## 🗡️ The Roadmap (Updated for RAG Vision)
 
-### 🛠️ The Roadmap
+### Level 1: The Core logic (Manual Entry) — CURRENT
+Build the engine that can "navigate" a graph of knowledge.
+- [x] **Skeleton**: The `Topic` and `Problem` Blueprints.
+- [x] **Muscles**: Manually seeded data for testing the brain.
+- [/] **Nervous System**: The "Logic" that decides what is next.
 
-#### 1. The Domain (The "What") — CURRENT CHALLENGE
-We need to define the "Shape" of our knowledge in `backend/models.py`.
+### Level 2: The Logic Bridge (FastAPI)
+Expose the Forge as a service that JARVIS can talk to.
 
-**The Task:**
-Create two Pydantic classes:
-- **`Topic`**:
-  - `id`: unique string.
-  - `name`: string.
-  - `prerequisites`: a list of other Topic IDs (e.g., `["topic_1", "topic_2"]`).
-  - `mastery_score`: a float (starts at 0.0).
-- **`Problem`**:
-  - `id`: unique string.
-  - `topic_id`: the ID of the topic it belongs to.
-  - `question`: the text of the problem.
-  - `answer`: the solution text.
-  - `difficulty`: an integer (e.g., 1, 2, or 3).
-
-**Pro-Tip**: Use `from pydantic import BaseModel` and `from typing import List`.
-
-#### 2. The Logic (The "How")
-We build a simple "Choose Next" algorithm.
-> *If Topic A is 100% mastered, unlock Topic B. If not, stay on Topic A.*
-
-#### 3. The Bridge (FastAPI)
-Connect our Python logic to the web so our Flutter app can talk to it later.
+### Level 3: The Intelligence Layer (PDF & RAG)
+- **PDF Extraction**: Convert page text to raw data.
+- **RAG Implementation**: Use LLMs to "auto-tag" and "auto-graph" the textbook.
+- **JARVIS Link**: "JARVIS, Red has a Physics test. What's the plan?"
 
 ---
 
-## 🎓 Why This Project?
+## 🎓 Why This Project Matters
 This project will teach you the 3 most important skills in Software Engineering:
-1. **Data Structures**: Using Graphs and Dictionaries to represent knowledge.
-2. **State Management**: Tracking a user's progress over time.
-3. **Algorithmic Thinking**: Writing code that making "decisions" based on data.
+1. **Data Structures**: Using Graphs to represent complex knowledge.
+2. **State Management**: Tracking mastery across a non-linear path.
+3. **Algorithmic Thinking**: Building the "Brain" that JARVIS will eventually use.
 
-*"Most people write code. You are crafting a mind."*
+*"We aren't building a study app. We are building the memory of an AI."*
