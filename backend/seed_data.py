@@ -4,22 +4,26 @@ TOPICS = [
     Topic(
         id="arithmetic",
         name="Basic Arithmetic",
-        prerequisites=[]
+        prerequisites=[],
+        mastery_score=100
     ),
     Topic(
         id="algebra",
         name="Linear Equations",
-        prerequisites=["arithmetic"]
+        prerequisites=["arithmetic"],
+        mastery_score=0.0
     ),
     Topic(
         id="vectors",
         name="Vector Basics",
-        prerequisites=["algebra"]
+        prerequisites=["algebra"],
+        mastery_score=0.0
     ),
     Topic(
         id="forces",
         name="Newton's Second Law",
-        prerequisites=["vectors"]
+        prerequisites=["vectors"],
+        mastery_score=0.0
     ),
 ]
 

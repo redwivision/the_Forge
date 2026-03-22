@@ -40,10 +40,24 @@ Expose the Forge as a service that JARVIS can talk to.
 
 ---
 
-## 🎓 Why This Project Matters
-This project will teach you the 3 most important skills in Software Engineering:
-1. **Data Structures**: Using Graphs to represent complex knowledge.
-2. **State Management**: Tracking mastery across a non-linear path.
-3. **Algorithmic Thinking**: Building the "Brain" that JARVIS will eventually use.
+---
 
-*"We aren't building a study app. We are building the memory of an AI."*
+## 🏛️ Deep Dive: Architectural Mastery
+You asked: *"How are we actually going to use these?"* This is where you move from "Coding" to "System Engineering."
+
+### 1. The Separation of Concerns (The "Wall")
+Your `logic.py` is the **Brain**. It should be able to run even if the Internet didn't exist. 
+Your `main.py` is the **Voice**. It translates the Brain's thoughts into **JSON** (the universal language of the web).
+
+**Why this matters**: Tomorrow, if you decide to build a Mobile App, a Website, AND a JARVIS voice assistant, they ALL talk to this ONE same API. You don't rewrite the brain 3 times. You just plug into the same bridge.
+
+### 2. The Statelessness Principle
+A professional API doesn't "remember" you between requests (unless we use a database). Every time you hit `/recommendation`, the server looks at the data **fresh**. This makes the system **Scalable**. If 1 million students used The Forge, we could just start 100 servers and they’d all work perfectly because they don’t rely on "local memory."
+
+### 3. The JARVIS Connection
+When we build JARVIS later, JARVIS won't look at your Python files. JARVIS will send an HTTP request to `http://127.0.0.1:8000/recommendation`. 
+- **JARVIS**: *"Hey Forge, what should Red study?"*
+- **Forge**: `{"id": "vectors", "name": "Vector Basics"}`
+- **JARVIS**: *"Red, the Forge says you need to master Vectors before we move to Physics. Let's start."*
+
+*"Mastering the craft isn't about writing code; it's about designing the flow."*

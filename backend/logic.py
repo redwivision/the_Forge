@@ -3,7 +3,9 @@ from seed_data import TOPICS
 def get_next_recommendation(topics):
     def checking_prerequisites(topic):
         topic_map = {t.id: t for t in topics}
-        for prerequisite in topic.prerequisites:
+        # Split "id1,id2" into ["id1", "id2"]
+        prereqs = [p.strip() for p in topic.prerequisites_raw.split(",") if p.strip()]
+        for prerequisite in prereqs:
             if topic_map[prerequisite].mastery_score < 100:
                 return False
         return True
