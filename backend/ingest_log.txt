@@ -27,97 +27,77 @@ https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/READM
   - Reading Page 14...
   - Reading Page 15...
 🧠 Sending TOC to Gemini for analysis...
-[
-  {
-    "title": "Chapter 1: Physics and Human Society",
-    "page": 1
-  },
-  {
-    "title": "Chapter 2: Physical Quantities",
-    "page": 11
-  },
-  {
-    "title": "Chapter 3: Motion in a Straight Line",
-    "page": 39
-  },
-  {
-    "title": "Chapter 4: Force, Work, Energy and Power",
-    "page": 63
-  },
-  {
-    "title": "Chapter 5: Simple Machines",
-    "page": 85
-  }
-]
 
---- STAGE 2: THE SIFTER (CHAPTER 2) ---
+--- STAGE 2: THE SIFTER ---
 🌪️ Sifting Chapter from page 11 to 39...
 🧠 Analyzing content with AI...
-{
-  "topics": [
-    {
-      "id": "branches_of_physics",
-      "name": "Branches of Physics",
-      "mastery_score": 0.0
-    },
-    {
-      "id": "interdisciplinary_physics",
-      "name": "Interdisciplinary Applications of Physics",
-      "mastery_score": 0.0
-    },
-    {
-      "id": "classical_vs_modern",
-      "name": "Classical and Modern Physics",
-      "mastery_score": 0.0
-    },
-    {
-      "id": "historical_contributors",
-      "name": "Historical Contributors to Physics",
-      "mastery_score": 0.0
-    }
-  ],
-  "problems": [
-    {
-      "id": "ex1.3",
-      "topic_id": "historical_contributors",
-      "question": "Mention some other well-known historical contributors in physics and describe their roles.",
-      "answer": "Answers may vary (e.g., Galileo Galilei for kinematics, Max Planck for quantum theory, etc.)"
-    },
-    {
-      "id": "q1",
-      "topic_id": "branches_of_physics",
-      "question": "The Greek word 'phusis' for nature is appropriate in describing the field of physics. Which one of the following is the best answer for this?\n(a) Physics is a natural science that studies life and living organisms on habitable planets like Earth.\n(b) Physics is a natural science that studies the laws and principles of our universe.\n(c) Physics is a physical science that studies the composition, structure, and changes of matter in our universe.\n(d) Physics is a social science that studies the social behavior of living beings on habitable planets like Earth.",
-      "answer": "(b)"
-    },
-    {
-      "id": "q2",
-      "topic_id": "branches_of_physics",
-      "question": "A moving car suddenly comes to a rest after applying brakes. Which branch of physics do you think is appropriate to explain this phenomenon?\n(a) Mechanics\n(b) Acoustics\n(c) Electromagnetism\n(d) Nuclear physics\n(e) None of the above",
-      "answer": "(a)"
-    },
-    {
-      "id": "q3",
-      "topic_id": "branches_of_physics",
-      "question": "Which of the following is not one of the branches of physics?\n(a) Thermodynamics\n(b) Optics\n(c) Classical physics\n(d) Evolution",
-      "answer": "(d)"
-    },
-    {
-      "id": "q4",
-      "topic_id": "historical_contributors",
-      "question": "Which of the following is not a historical contributor in physics?\n(a) Willebrod Snell\n(b) Daniel Bernoulli\n(c) Thomas Young\n(d) Charles Darwin",
-      "answer": "(d)"
-    },
-    {
-      "id": "q5",
-      "topic_id": "interdisciplinary_physics",
-      "question": "Which of the following institution/project does not apply the principle of physics?\n(a) Ethiopian Aviation Industry\n(b) Grand Ethiopian Renaissance Dam (GERD)\n(c) Quality and Standard Authority of Ethiopia\n(d) Ethiopian Radiation Protection Authority\n(e) None of the above",
-      "answer": "(e)"
-    },
-    {
-      "id": "q6",
-      "topic_id": "branches_of_physics",
-      "question": "Which branch of Physics is most important when studying the nature and behavior of light?\n(a) Quantum Mechanics",
-      "answer": "Optics (Note: Question text was truncated in source)"
-    }
-  ]
-}
+⛏️ Mining data to database...
+2026-03-22 09:39:29,491 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-03-22 09:39:29,493 INFO sqlalchemy.engine.Engine SELECT topic.id AS topic_id, topic.name AS topic_name, topic.prerequisites_raw AS topic_prerequisites_raw, topic.mastery_score AS topic_mastery_score 
+FROM topic 
+WHERE topic.id = ?
+2026-03-22 09:39:29,494 INFO sqlalchemy.engine.Engine [generated in 0.00017s] ('branches_of_physics',)
+2026-03-22 09:39:29,495 INFO sqlalchemy.engine.Engine INSERT INTO topic (id, name, prerequisites_raw, mastery_score) VALUES (?, ?, ?, ?)
+2026-03-22 09:39:29,495 INFO sqlalchemy.engine.Engine [generated in 0.00008s] ('branches_of_physics', 'Branches of Physics', '', 0.0)
+2026-03-22 09:39:29,496 INFO sqlalchemy.engine.Engine SELECT topic.id AS topic_id, topic.name AS topic_name, topic.prerequisites_raw AS topic_prerequisites_raw, topic.mastery_score AS topic_mastery_score 
+FROM topic 
+WHERE topic.id = ?
+2026-03-22 09:39:29,496 INFO sqlalchemy.engine.Engine [cached since 0.002237s ago] ('interdisciplinary_physics',)
+2026-03-22 09:39:29,496 INFO sqlalchemy.engine.Engine INSERT INTO topic (id, name, prerequisites_raw, mastery_score) VALUES (?, ?, ?, ?)
+2026-03-22 09:39:29,496 INFO sqlalchemy.engine.Engine [cached since 0.001018s ago] ('interdisciplinary_physics', 'Interdisciplinary Fields of Physics', '', 0.0)
+2026-03-22 09:39:29,496 INFO sqlalchemy.engine.Engine SELECT topic.id AS topic_id, topic.name AS topic_name, topic.prerequisites_raw AS topic_prerequisites_raw, topic.mastery_score AS topic_mastery_score 
+FROM topic 
+WHERE topic.id = ?
+2026-03-22 09:39:29,496 INFO sqlalchemy.engine.Engine [cached since 0.002727s ago] ('historical_contributors',)
+2026-03-22 09:39:29,496 INFO sqlalchemy.engine.Engine INSERT INTO topic (id, name, prerequisites_raw, mastery_score) VALUES (?, ?, ?, ?)
+2026-03-22 09:39:29,496 INFO sqlalchemy.engine.Engine [cached since 0.001439s ago] ('historical_contributors', 'Historical Issues and Contributors', '', 0.0)
+2026-03-22 09:39:29,496 INFO sqlalchemy.engine.Engine SELECT topic.id AS topic_id, topic.name AS topic_name, topic.prerequisites_raw AS topic_prerequisites_raw, topic.mastery_score AS topic_mastery_score 
+FROM topic 
+WHERE topic.id = ?
+2026-03-22 09:39:29,496 INFO sqlalchemy.engine.Engine [cached since 0.003133s ago] ('definition_of_physics',)
+2026-03-22 09:39:29,497 INFO sqlalchemy.engine.Engine INSERT INTO topic (id, name, prerequisites_raw, mastery_score) VALUES (?, ?, ?, ?)
+2026-03-22 09:39:29,497 INFO sqlalchemy.engine.Engine [cached since 0.001943s ago] ('definition_of_physics', 'Definition and Nature of Physics', '', 0.0)
+2026-03-22 09:39:29,497 INFO sqlalchemy.engine.Engine SELECT problem.id AS problem_id, problem.topic_id AS problem_topic_id, problem.question AS problem_question, problem.answer AS problem_answer, problem.difficulty AS problem_difficulty 
+FROM problem 
+WHERE problem.id = ?
+2026-03-22 09:39:29,497 INFO sqlalchemy.engine.Engine [generated in 0.00005s] ('ex1.3',)
+2026-03-22 09:39:29,498 INFO sqlalchemy.engine.Engine INSERT INTO problem (id, topic_id, question, answer, difficulty) VALUES (?, ?, ?, ?, ?)
+2026-03-22 09:39:29,498 INFO sqlalchemy.engine.Engine [generated in 0.00006s] ('ex1.3', 'historical_contributors', 'Mention some other well-known historical contributors in physics and describe their roles.', 'Open-ended response (e.g., Galileo Galilei for observational astronomy/kinematics, James Clerk Maxwell for electromagnetism, or Niels Bohr for atomic structure).', 2)
+2026-03-22 09:39:29,499 INFO sqlalchemy.engine.Engine SELECT problem.id AS problem_id, problem.topic_id AS problem_topic_id, problem.question AS problem_question, problem.answer AS problem_answer, problem.difficulty AS problem_difficulty 
+FROM problem 
+WHERE problem.id = ?
+2026-03-22 09:39:29,499 INFO sqlalchemy.engine.Engine [cached since 0.001443s ago] ('q1',)
+2026-03-22 09:39:29,499 INFO sqlalchemy.engine.Engine INSERT INTO problem (id, topic_id, question, answer, difficulty) VALUES (?, ?, ?, ?, ?)
+2026-03-22 09:39:29,499 INFO sqlalchemy.engine.Engine [cached since 0.0006884s ago] ('q1', 'definition_of_physics', "The Greek word 'phusis' for nature is appropriate in describing the field of physics. Which one of the following is the best answer for this? (a) Phy ... (264 characters truncated) ... changes of matter in our universe. (d) Physics is a social science that studies the social behavior of living beings on habitable planets like Earth.", '(b)', 2)
+2026-03-22 09:39:29,499 INFO sqlalchemy.engine.Engine SELECT problem.id AS problem_id, problem.topic_id AS problem_topic_id, problem.question AS problem_question, problem.answer AS problem_answer, problem.difficulty AS problem_difficulty 
+FROM problem 
+WHERE problem.id = ?
+2026-03-22 09:39:29,499 INFO sqlalchemy.engine.Engine [cached since 0.001817s ago] ('q2',)
+2026-03-22 09:39:29,499 INFO sqlalchemy.engine.Engine INSERT INTO problem (id, topic_id, question, answer, difficulty) VALUES (?, ?, ?, ?, ?)
+2026-03-22 09:39:29,499 INFO sqlalchemy.engine.Engine [cached since 0.001056s ago] ('q2', 'branches_of_physics', 'A moving car suddenly comes to a rest after applying brakes. Which branch of physics do you think is appropriate to explain this phenomenon? (a) Mechanics (b) Acoustics (c) Electromagnetism (d) Nuclear physics (e) None of the above', '(a)', 2)
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine SELECT problem.id AS problem_id, problem.topic_id AS problem_topic_id, problem.question AS problem_question, problem.answer AS problem_answer, problem.difficulty AS problem_difficulty 
+FROM problem 
+WHERE problem.id = ?
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine [cached since 0.002197s ago] ('q3',)
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine INSERT INTO problem (id, topic_id, question, answer, difficulty) VALUES (?, ?, ?, ?, ?)
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine [cached since 0.001455s ago] ('q3', 'branches_of_physics', 'Which of the following is not one of the branches of physics? (a) Thermodynamics (b) Optics (c) Classical physics (d) Evolution', '(d)', 2)
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine SELECT problem.id AS problem_id, problem.topic_id AS problem_topic_id, problem.question AS problem_question, problem.answer AS problem_answer, problem.difficulty AS problem_difficulty 
+FROM problem 
+WHERE problem.id = ?
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine [cached since 0.002582s ago] ('q4',)
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine INSERT INTO problem (id, topic_id, question, answer, difficulty) VALUES (?, ?, ?, ?, ?)
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine [cached since 0.001796s ago] ('q4', 'historical_contributors', 'Which of the following is not a historical contributor in physics? (a) Willebrod Snell (b) Daniel Bernoulli (c) Thomas Young (d) Charles Darwin', '(d)', 2)
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine SELECT problem.id AS problem_id, problem.topic_id AS problem_topic_id, problem.question AS problem_question, problem.answer AS problem_answer, problem.difficulty AS problem_difficulty 
+FROM problem 
+WHERE problem.id = ?
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine [cached since 0.002913s ago] ('q5',)
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine INSERT INTO problem (id, topic_id, question, answer, difficulty) VALUES (?, ?, ?, ?, ?)
+2026-03-22 09:39:29,500 INFO sqlalchemy.engine.Engine [cached since 0.002119s ago] ('q5', 'interdisciplinary_physics', 'Which of the following institution/project does not apply the principle of physics? (a) Ethiopian Aviation Industry (b) Grand Ethiopian Renaissance Dam (GERD) (c) Quality and Standard Authority of Ethiopia (d) Ethiopian Radiation Protection Authority (e) None of the above', '(e)', 2)
+2026-03-22 09:39:29,501 INFO sqlalchemy.engine.Engine SELECT problem.id AS problem_id, problem.topic_id AS problem_topic_id, problem.question AS problem_question, problem.answer AS problem_answer, problem.difficulty AS problem_difficulty 
+FROM problem 
+WHERE problem.id = ?
+2026-03-22 09:39:29,501 INFO sqlalchemy.engine.Engine [cached since 0.00322s ago] ('q6',)
+2026-03-22 09:39:29,501 INFO sqlalchemy.engine.Engine INSERT INTO problem (id, topic_id, question, answer, difficulty) VALUES (?, ?, ?, ?, ?)
+2026-03-22 09:39:29,501 INFO sqlalchemy.engine.Engine [cached since 0.002409s ago] ('q6', 'branches_of_physics', 'Which branch of Physics is most important when studying the nature and behavior of light? (a) Quantum Mechanics (Note: based on the text description of optics)', 'Optics', 2)
+2026-03-22 09:39:29,501 INFO sqlalchemy.engine.Engine COMMIT
+✅ Database sync complete!

@@ -7,6 +7,10 @@ from dotenv import load_dotenv
 # Load environment variables from .env file immediately
 load_dotenv()
 
+from sqlmodel import Session
+from database import engine
+from Models import Topic, Problem
+
 # --- THE FORGE: SMART SIEVE (STAGE 1: THE SCOUT) ---
 
 class ForgeIngestor:
@@ -125,25 +129,59 @@ class ForgeIngestor:
             print("❌ Error: Scout failed to parse JSON.")
             return {"error": "failed_to_parse_toc", "raw": response.text}
 
+    def mine_to_db(self, sifted_data: dict):
+        """
+        Stage 4: The Miner (Sync to DB)
+        Takes the AI JSON and commits it to the SQLite database.
+        """
+        print("⛏️ Mining data to database...")
+        with Session(engine) as session:
+            # 1. Add Topics
+            for t_data in sifted_data.get("topics", []):
+                topic = Topic(
+                    id=t_data["id"],
+                    name=t_data["name"],
+                    mastery_score=t_data.get("mastery_score", 0.0)
+                )
+                session.merge(topic) # Use merge to update if exists
+            
+            # 2. Add Problems
+            for p_data in sifted_data.get("problems", []):
+                problem = Problem(
+                    id=p_data["id"],
+                    topic_id=p_data["topic_id"],
+                    question=p_data["question"],
+                    answer=p_data["answer"],
+                    difficulty=p_data.get("difficulty", 2)
+                )
+                session.merge(problem)
+            
+            session.commit()
+            print("✅ Database sync complete!")
+
 if __name__ == "__main__":
-    # Test run
     PDF_PATH = "/Users/Learning/Desktop/projects/the_forge/grade 9-physics.pdf"
     
     try:
         scout = ForgeIngestor()
         
+        # Stage 1: Scout
         print("--- STAGE 1: THE SCOUT ---")
         battle_map = scout.scout_pdf(PDF_PATH)
-        print(json.dumps(battle_map, indent=2))
         
         if isinstance(battle_map, list) and len(battle_map) > 1:
-            print("\n--- STAGE 2: THE SIFTER (CHAPTER 2) ---")
-            # We'll test on Chapter 2: Physical Quantities (usually p11 to p39 based on our map)
+            # Stage 2: Sifter (Chapter 2)
+            print("\n--- STAGE 2: THE SIFTER ---")
             ch2 = battle_map[1]
             ch3_start = battle_map[2]["page"] if len(battle_map) > 2 else ch2["page"] + 20
             
             sifted_gold = scout.sift_chapter(PDF_PATH, ch2["page"], ch3_start)
-            print(json.dumps(sifted_gold, indent=2))
+            
+            # Stage 4: Miner (Sync to DB)
+            if "error" not in sifted_gold:
+                scout.mine_to_db(sifted_gold)
+            else:
+                print(f"❌ Sifting failed: {sifted_gold}")
             
     except Exception as e:
         print(f"Test Failed: {e}")
